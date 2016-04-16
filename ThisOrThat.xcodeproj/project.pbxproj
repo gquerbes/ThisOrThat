@@ -14,6 +14,8 @@
 		7450F7491CC2F058001EEAE9 /* Game.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7450F7481CC2F058001EEAE9 /* Game.xcassets */; };
 		7450F74C1CC2F058001EEAE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7450F74A1CC2F058001EEAE9 /* Main.storyboard */; };
 		7450F74E1CC2F058001EEAE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7450F74D1CC2F058001EEAE9 /* Assets.xcassets */; };
+		7450F7561CC2F0AB001EEAE9 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7450F7551CC2F0AB001EEAE9 /* Card.swift */; };
+		7450F7581CC2F3ED001EEAE9 /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7450F7571CC2F3ED001EEAE9 /* Questions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		7450F74B1CC2F058001EEAE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7450F74D1CC2F058001EEAE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7450F74F1CC2F058001EEAE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7450F7551CC2F0AB001EEAE9 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		7450F7571CC2F3ED001EEAE9 /* Questions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Questions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 				7450F7401CC2F058001EEAE9 /* AppDelegate.swift */,
 				7450F7421CC2F058001EEAE9 /* GameScene.sks */,
 				7450F7441CC2F058001EEAE9 /* GameScene.swift */,
+				7450F7571CC2F3ED001EEAE9 /* Questions.swift */,
+				7450F7551CC2F0AB001EEAE9 /* Card.swift */,
 				7450F7461CC2F058001EEAE9 /* GameViewController.swift */,
 				7450F7481CC2F058001EEAE9 /* Game.xcassets */,
 				7450F74A1CC2F058001EEAE9 /* Main.storyboard */,
@@ -146,6 +152,8 @@
 				7450F7451CC2F058001EEAE9 /* GameScene.swift in Sources */,
 				7450F7471CC2F058001EEAE9 /* GameViewController.swift in Sources */,
 				7450F7411CC2F058001EEAE9 /* AppDelegate.swift in Sources */,
+				7450F7581CC2F3ED001EEAE9 /* Questions.swift in Sources */,
+				7450F7561CC2F0AB001EEAE9 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
