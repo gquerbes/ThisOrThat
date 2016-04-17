@@ -20,12 +20,12 @@ class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-//        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-//        myLabel.text = "or"
-//        myLabel.fontSize = 65
-//        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
-//
-//        self.addChild(myLabel)
+        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
+        myLabel.text = "or"
+        myLabel.fontSize = 120
+        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
+
+        self.addChild(myLabel)
 
         //Register Swipe Events
         let swipeRight:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameScene.swipedRight(_:)))
@@ -37,9 +37,9 @@ class GameScene: SKScene {
         view.addGestureRecognizer(swipeLeft)
         
         
-        blueLabel = SKMultilineLabel(text: "", labelWidth: 280, pos: CGPoint(x: 0, y: +150 ),leading: 60, fontSize:50)
+        blueLabel = SKMultilineLabel(text: "This", labelWidth: 280, pos: CGPoint(x: 0, y: +200 ),leading: 60, fontSize:40)
         
-       redLabel = SKMultilineLabel(text: "", labelWidth: 280, pos: CGPoint(x: 0, y: +150 ),leading: 60, fontSize:50)
+       redLabel = SKMultilineLabel(text: "That", labelWidth: 280, pos: CGPoint(x: 0, y: +200 ),leading: 60, fontSize:40)
        
         
         //place cards on screen
@@ -84,12 +84,14 @@ class GameScene: SKScene {
     
     // MARK: - Gestures
     func swipedRight(sender:UISwipeGestureRecognizer){
-        let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-        blueCard.runAction(SKAction.repeatAction(action, count: 4))
+        let action = SKAction.rotateByAngle(CGFloat(M_PI), duration: 0.5)
+        blueCard.runAction(SKAction.repeatAction(action, count: 2))
         updateLabels()
     }
     
     func swipedLeft(sender:UISwipeGestureRecognizer){
+        let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:0.5)
+        redCard.runAction(SKAction.repeatAction(action, count: 2))
         updateLabels()
     }
 
