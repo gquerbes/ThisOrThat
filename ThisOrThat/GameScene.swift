@@ -20,6 +20,8 @@ class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
+        self.backgroundColor = UIColor.cyanColor()
+        
         let myLabel = SKLabelNode(fontNamed:"Chalkduster")
         myLabel.text = "or"
         myLabel.fontSize = 120
@@ -27,6 +29,7 @@ class GameScene: SKScene {
 
         self.addChild(myLabel)
 
+        
         //Register Swipe Events
         let swipeRight:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameScene.swipedRight(_:)))
         swipeRight.direction = .Right
@@ -35,6 +38,10 @@ class GameScene: SKScene {
         let swipeLeft:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameScene.swipedLeft(_:)))
         swipeLeft.direction = .Left
         view.addGestureRecognizer(swipeLeft)
+        
+        let swipeDown:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameScene.swipedDown(_:)))
+        swipeDown.direction = .Down
+        view.addGestureRecognizer(swipeDown)
         
         
         blueLabel = SKMultilineLabel(text: "This", labelWidth: 280, pos: CGPoint(x: 0, y: +200 ),leading: 60, fontSize:40)
@@ -86,16 +93,18 @@ class GameScene: SKScene {
     func swipedRight(sender:UISwipeGestureRecognizer){
         let action = SKAction.rotateByAngle(CGFloat(M_PI), duration: 0.5)
         blueCard.runAction(SKAction.repeatAction(action, count: 2))
-        updateLabels()
+        
     }
     
     func swipedLeft(sender:UISwipeGestureRecognizer){
         let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:0.5)
         redCard.runAction(SKAction.repeatAction(action, count: 2))
-        updateLabels()
+        
     }
 
-    
+    func swipedDown(sender:UISwipeGestureRecognizer){
+        updateLabels()
+    }
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
         
