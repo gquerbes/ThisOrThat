@@ -12,8 +12,7 @@ class GameScene: SKScene {
     var questions = Questions()
     let redCard = Card(imageNamed: "redCard.png")
     let blueCard = Card(imageNamed: "blueCard.png")
-    var blueLabel : SKMultilineLabel!
-    var redLabel : SKMultilineLabel!
+
     
     
     
@@ -43,22 +42,14 @@ class GameScene: SKScene {
         swipeDown.direction = .Down
         view.addGestureRecognizer(swipeDown)
         
-        
-        blueLabel = SKMultilineLabel(text: "This", labelWidth: 280, pos: CGPoint(x: 0, y: +200 ),leading: 60, fontSize:40)
-        
-       redLabel = SKMultilineLabel(text: "That", labelWidth: 280, pos: CGPoint(x: 0, y: +200 ),leading: 60, fontSize:40)
-       
+
         
         //place cards on screen
         redCard.position = CGPointMake(400,600)
         addChild(redCard)
-        redLabel.zPosition = 1
-        redCard.addChild(redLabel)
-            
         blueCard.position = CGPointMake(1500,600)
         addChild(blueCard)
-        blueLabel.zPosition = 1
-        blueCard.addChild(blueLabel)
+        
        
     }
     
@@ -85,8 +76,8 @@ class GameScene: SKScene {
 
     func updateLabels(){
         let myQuestions = questions.getSet3()
-        blueLabel.text = myQuestions[0]
-        redLabel.text = myQuestions[1]
+        blueCard.label.text = myQuestions[0]
+        redCard.label.text = myQuestions[1]
     }
     
     // MARK: - Gestures
@@ -99,11 +90,27 @@ class GameScene: SKScene {
     func swipedLeft(sender:UISwipeGestureRecognizer){
         let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:0.5)
         redCard.runAction(SKAction.repeatAction(action, count: 2))
+        let action2 = SKAction.resizeToWidth(600, height: 900, duration: 1)
+        redCard.runAction(SKAction.repeatAction(action2, count: 1))
+        let action3 = SKAction.moveTo(CGPointMake(960, 540), duration: 1)
+        redCard.runAction(SKAction.repeatAction(action3, count: 2))
         
     }
 
     func swipedDown(sender:UISwipeGestureRecognizer){
-        updateLabels()
+        
+        let moveBack = SKAction.moveTo(CGPointMake(400, 600), duration: 1)
+        let shrinkBack = SKAction.resizeToWidth(300, height: 450, duration: 1)
+        
+        redCard.runAction(SKAction.repeatAction(moveBack, count: 2))
+        //update labels after completing the resize function
+        redCard.runAction(SKAction.repeatAction(shrinkBack, count: 2))
+        
+        redCard.runAction(SKAction .waitForDuration(2), completion: {
+            self.updateLabels()
+            })
+        
+        
     }
     
     
