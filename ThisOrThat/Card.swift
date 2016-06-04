@@ -8,8 +8,9 @@
 
 import Foundation
 import SpriteKit
-
-
+/**
+ Card object
+ */
 class Card : SKSpriteNode {
     var label : SKMultilineLabel
     
@@ -20,7 +21,7 @@ class Card : SKSpriteNode {
     init(imageNamed: String) {
         let cardTexture = SKTexture(imageNamed: imageNamed)
         //initialize label
-        label = SKMultilineLabel(text: "That", labelWidth: 280, pos: CGPoint(x: 0, y: +200 ),leading: 60, fontSize:40)
+        label = SKMultilineLabel(text: "That", labelWidth: 280, pos: CGPoint(x: 0, y: 0 ),leading: 60, fontSize:40)
         super.init(texture: cardTexture, color: UIColor.brownColor(), size: cardTexture.size())
         
         //set label on card
