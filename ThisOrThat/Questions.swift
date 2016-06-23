@@ -21,6 +21,8 @@ class Questions{
                 ["be without elbows","be without knees"],
                 ["experience a sharp pain in your side each time someone says your name","have a bell sound each time you are aroused"]]
     
+    
+    
     private func getRandomNumber() -> Int{
         let randomNumber = Int(arc4random_uniform(UInt32(set3.count)))
         return randomNumber

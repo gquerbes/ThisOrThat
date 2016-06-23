@@ -26,9 +26,6 @@ class Card : SKSpriteNode {
         super.init(texture: cardTexture,color: UIColor.brown(), size: CGSize(width: 500, height:400))
 
         
-        //set label on card
-        
-        self.addChild(label)
-        label.zPosition = 3
+     
     }
 }

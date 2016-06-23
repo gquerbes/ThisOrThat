@@ -14,8 +14,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //cards
     var redCard: SKSpriteNode!
     var blueCard: SKSpriteNode!
-//    let redCard = Card(imageNamed: "redCard.png")
-//    let blueCard = Card(imageNamed: "blueCard.png")
+    //phycial locations
+    let centerPoint = CGPoint(x:960, y:540)
     
     
     
@@ -23,7 +23,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         /* Setup your scene here */
-        //self.backgroundColor = UIColor.cyanColor()
+        
         
         //set self to be physics world delegate
         self.physicsWorld.contactDelegate = self
@@ -35,12 +35,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         blueCard.zPosition = 0
         
         // "or" label
-//        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-//        myLabel.text = "or"
-//        myLabel.fontSize = 120
-//        myLabel.position = CGPoint(x:(CGRectGetMidX(self.frame)/2), y:CGRectGetMidY(self.frame))
-//        myLabel.zPosition = 0
-//        self.addChild(myLabel)
+        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
+        myLabel.text = "or"
+        myLabel.fontSize = 120
+        myLabel.position = CGPoint(x:(self.frame.midX), y:self.frame.midY)
+        myLabel.zPosition = 0
+        self.addChild(myLabel)
 
         //update labels
         updateLabels()
@@ -64,10 +64,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
        
     }
     
-//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//
-//        }
-//    }
 
     
     
@@ -78,19 +74,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         //initialize RED label
-        let redLabel = SKMultilineLabel(text: "This", labelWidth: 100, pos: CGPoint(x: 0, y: 0 ),leading: 20, fontSize:10)
-        
+        let redLabel = SKMultilineLabel(text: "This", labelWidth: 100, pos: CGPoint(x: 0, y: 20 ),leading: 15, fontSize:10)
         //set red label on card
-        redLabel.zPosition = 1
-        //redCard.addChild(redLabel)
+        redLabel.zPosition = 0
+    
         
         //initialize BLUE label
-        let blueLabel = SKMultilineLabel(text: "That", labelWidth: 280, pos: CGPoint(x: 0, y: 0 ),leading: 10, fontSize:10)
-        //        super.init(texture: cardTexture, color: UIColor.brownColor(), size: cardTexture.size())
-        
+        let blueLabel = SKMultilineLabel(text: "That", labelWidth: 100, pos: CGPoint(x: 0, y: 20 ),leading: 15, fontSize:10)
         //set blue label on card
-        blueLabel.zPosition = 1
-        //blueCard.addChild(blueLabel)
+        blueLabel.zPosition = 0
+        
+        
         
         //update questions
         let myQuestions = questions.getSet3()
@@ -107,16 +101,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
      process a right swipe
     */
     func swipedRight(_ sender:UISwipeGestureRecognizer){
+        //check that no cards are currently centered
+        if !(redCard.position == centerPoint || blueCard.position == centerPoint){
+            //set blue card behind
+            blueCard.zPosition = 1
+            //set red card ahead
+            redCard.zPosition = 2
+            //move red card to center
+            let moveToCenter = SKAction.move(to: CGPoint(x:960, y:540), duration: 1)
+            redCard.run(moveToCenter)
+            //rotate red card
+            let action = SKAction.rotate(byAngle: CGFloat(M_PI), duration: 0.5)
+            redCard.run(SKAction.repeat(action, count: 2))
+            
+        }
         
-        print("right swipe")
-        let moveInDirection = SKAction.move(by: CGVector(dx: 300, dy: 300), duration: 1)
-        redCard.run(moveInDirection)
         
-//        let moveToRight = SKAction.moveTo(x: 1000, duration: 1.0)
-//        redCard.run(SKAction.repeat(moveToRight, count: 1))
-  
-        let action = SKAction.rotate(byAngle: CGFloat(M_PI), duration: 0.5)
-        redCard.run(SKAction.repeat(action, count: 2))
         
     }
     
@@ -124,7 +124,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
      process a left swipe
      */
     func swipedLeft(_ sender:UISwipeGestureRecognizer){
-    
+        //check that no cards are currently centered
+        if !(redCard.position == centerPoint || blueCard.position == centerPoint){
+            //move red card behind
+            redCard.zPosition = 1
+            //move blue card ahead
+            blueCard.zPosition = 2
+            //move blue card to center
+            let moveToCenter = SKAction.move(to: CGPoint(x:960, y:540), duration: 1)
+            blueCard.run(moveToCenter)
+            //rotate blue card
+            let action = SKAction.rotate(byAngle: CGFloat(M_PI), duration: 0.5)
+            blueCard.run(SKAction.repeat(action, count: 2))
+        }
     }
     
     
@@ -132,20 +144,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
      process a down swipe
      */
     func swipedDown(_ sender:UISwipeGestureRecognizer){
-        
-        let moveInDirection = SKAction.move(by: CGVector(dx: -300, dy: -300), duration: 1)
-        redCard.run(moveInDirection)
-
-        
-        let action = SKAction.rotate(byAngle: CGFloat(M_PI), duration: 0.5)
-        redCard.run(SKAction.repeat(action, count: 2))
+        //check that one card is centered
+        if redCard.position == centerPoint || blueCard.position == centerPoint{
+            //return cards to start
+            let returnToRedStart = SKAction.move(to: CGPoint(x:400, y:540), duration: 1)
+            redCard.run(returnToRedStart)
+            
+            let returnToBlueStart = SKAction.move(to: CGPoint(x:1500, y:540), duration: 1)
+            blueCard.run(returnToBlueStart)
+            
+            
+            //update labels after completing the wait action
+            redCard.run(SKAction.wait(forDuration: 1), completion: {
+                self.updateLabels()
                 
-        
-        //update labels after completing the wait action
-        redCard.run(SKAction.wait(forDuration: 2), completion: {
-            self.updateLabels()
-           
             })
+        }
+        
     
     }
     
