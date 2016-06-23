@@ -21,11 +21,14 @@ class Card : SKSpriteNode {
     init(imageNamed: String) {
         let cardTexture = SKTexture(imageNamed: imageNamed)
         //initialize label
-        label = SKMultilineLabel(text: "That", labelWidth: 280, pos: CGPoint(x: 0, y: 0 ),leading: 60, fontSize:40)
-        super.init(texture: cardTexture, color: UIColor.brownColor(), size: cardTexture.size())
+        label = SKMultilineLabel(text: "That", labelWidth: 100, pos: CGPoint(x: 0, y: 0 ),leading: 60, fontSize:20)
+//        (texture: cardTexture, color: UIColor.brown(),size: x)
+        super.init(texture: cardTexture,color: UIColor.brown(), size: CGSize(width: 500, height:400))
+
         
         //set label on card
-        label.zPosition = 1
+        
         self.addChild(label)
+        label.zPosition = 3
     }
 }
